@@ -4,6 +4,10 @@ import { getTransactionsList, searchTransactions } from "../../services/transact
 import { useDispatch, useSelector } from "react-redux";
 import { listTransactions } from "../../services/actions/transactionActions";
 import TableTransactions from '../tableTransactions';
+import RechercheTransactions from '../rechercheTransactions';
+
+import './style.css';
+import { ListTransactionsConstants } from '../../services/constants';
 
 function ListTransactions() {
 
@@ -27,6 +31,9 @@ function ListTransactions() {
         getTransactions();
     }, []);
 
+    const handleGenererRapport = () => {
+        console.log(transactions.map((transaction) => transaction.id));
+    }
 
     const handleClick = async () => {
         // console.log(transactions)
@@ -57,10 +64,19 @@ function ListTransactions() {
     }
     
     return (
-        <>
-            <TableTransactions />  
+        <div className='p-4'>
+            <div className='list-head my-5'>Liste des Transactions</div>
+            <div className='list-container'>
+                <RechercheTransactions /> 
+                <TableTransactions />  
+            </div>
+            <div className='d-flex flex-row-reverse'>
+                <button type='submit' className='generer-rapport-button px-5 py-2 my-3' onClick={() => handleGenererRapport()}>
+                    {ListTransactionsConstants.genererRapport}
+                </button>
+            </div>
             <Button onClick={() => handleClick()}>Get List</Button>
-        </>
+        </div>
       );
 }
 
