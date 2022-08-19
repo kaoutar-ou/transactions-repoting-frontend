@@ -75,7 +75,7 @@ function ListTransactions() {
                     {ListTransactionsConstants.genererRapport}
                 </button>
             </div>
-            <Button onClick={() => handleClick()}>Get List</Button>
+            {/* <Button onClick={() => handleClick()}>Get List</Button> */}
         </div>
       );
 }
