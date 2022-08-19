@@ -1,0 +1,22 @@
+.pagination-item {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
+.pagination-item:hover {
+    /* background-color: rgba(247, 94, 31, 1); */
+    background-color: rgba(255, 237, 221, 1);
+    /* color: white; */
+    color: black;
+}
+
+.active-page {
+    background-color: rgba(247, 94, 31, 1);
+    color: white;
+}
+
+.pagination-container {
+    border-radius: 5px;
+    overflow: hidden;
+}

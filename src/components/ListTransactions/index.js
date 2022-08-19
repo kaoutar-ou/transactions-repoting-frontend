@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { listTransactions } from "../../services/actions/transactionActions";
 import TableTransactions from '../tableTransactions';
 import RechercheTransactions from '../rechercheTransactions';
+import Paginator from '../paginator';
 
 import './style.css';
 import { ListTransactionsConstants } from '../../services/constants';
@@ -70,10 +71,17 @@ function ListTransactions() {
                 <RechercheTransactions /> 
                 <TableTransactions />  
             </div>
-            <div className='d-flex flex-row-reverse'>
-                <button type='submit' className='generer-rapport-button px-5 py-2 my-3' onClick={() => handleGenererRapport()}>
-                    {ListTransactionsConstants.genererRapport}
-                </button>
+            <div className='row my-3'>
+                <div className='col col-6'>
+                    <Paginator active={1} numPages={5}/>
+                </div>
+                <div className='col col-6'>
+                    <div className='d-flex flex-row-reverse'>
+                        <button type='submit' className='generer-rapport-button px-5 py-2' onClick={() => handleGenererRapport()}>
+                            {ListTransactionsConstants.genererRapport}
+                        </button>
+                    </div>
+                </div>
             </div>
             {/* <Button onClick={() => handleClick()}>Get List</Button> */}
         </div>
