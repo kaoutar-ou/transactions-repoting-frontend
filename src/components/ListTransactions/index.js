@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import {Table, Button} from 'react-bootstrap';
-import { getTransactionsList, searchTransactions } from "../../services/transactionService"
+import * as transactionService from "../../services/transactionService"
+import * as pdfTransactionService from "../../services/pdfTransactionService"
 import { useDispatch, useSelector } from "react-redux";
 import { listTransactions } from "../../services/actions/transactionActions";
 import TableTransactions from '../tableTransactions';
@@ -17,7 +18,7 @@ function ListTransactions() {
     const dispatch = useDispatch();
 
     const getTransactions = async () => {
-        const response = await getTransactionsList(3);
+        const response = await transactionService.getTransactionsList(3);
         if (Object.keys(response.errMsgs).length > 0 ) {
             console.log("response.errMsgs");
         }
@@ -32,8 +33,23 @@ function ListTransactions() {
         getTransactions();
     }, []);
 
-    const handleGenererRapport = () => {
+    const handleGenererRapport = async () => {
         console.log(transactions.map((transaction) => transaction.id));
+        let res = await pdfTransactionService.getPdfTransactions(3, document);
+        console.log('res');
+        console.log(res);
+        // const url = window.URL.createObjectURL(new Blob([res.pdf]));
+        // const link = document.createElement('a');
+        // link.href = url;
+        // link.setAttribute('download', 'file.pdf'); //or any other extension
+        // document.body.appendChild(link);
+        // link.click();
+
+        // const file = new Blob([res.pdf], { type: 'application/pdf' });
+        // const fileURL = URL.createObjectURL(file);
+        // window.open(fileURL, "_blank");
+
+        
     }
 
     const handleClick = async () => {
@@ -50,7 +66,7 @@ function ListTransactions() {
             beneficiaire_id : null
         }
 
-        const response = await searchTransactions(3, txn);
+        const response = await transactionService.searchTransactions(3, txn);
         if (Object.keys(response.errMsgs).length > 0 ) {
             console.log("response.errMsgs");
         }
@@ -73,7 +89,7 @@ function ListTransactions() {
             </div>
             <div className='row my-3'>
                 <div className='col col-6'>
-                    <Paginator active={1} numPages={5}/>
+                    <Paginator active={1} numPages={14}/>
                 </div>
                 <div className='col col-6'>
                     <div className='d-flex flex-row-reverse'>

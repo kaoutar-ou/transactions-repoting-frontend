@@ -2,9 +2,12 @@ import React from 'react'
 import {Table, Button} from 'react-bootstrap';
 import { useDispatch, useSelector } from "react-redux";
 
-import viewIcon from '../../view-icon.svg'
+import viewIcon from '../../view-icon.svg';
+import downloadIcon from '../../download-icon.svg';
+
 import './style.css';
-import {ListTransactionsConstants, TableTransactionsColumns} from '../../services/constants'
+import * as constants from '../../services/constants'
+import * as pdfTransactionService from "../../services/pdfTransactionService"
 
 function TableTransactions() {
     
@@ -13,6 +16,12 @@ function TableTransactions() {
     const handleViewTransactionClick = (transaction_id) => {
         console.log(transaction_id)
     }
+
+    const handleDownloadTransactionClick = async (transaction_id) => {
+        console.log(transaction_id)
+        let res = await pdfTransactionService.getPdfTransaction(3, transaction_id, document);
+    }
+
   return (
     <div className='table-container border'>
         <Table responsive>
@@ -20,7 +29,7 @@ function TableTransactions() {
                 <tr>
                 {/* <th>#</th> */}
                 {
-                    Object.values(TableTransactionsColumns).map((value, index) => {
+                    Object.values(constants.TableTransactionsColumns).map((value, index) => {
                         return <th key={index} className='p-3 table-head'>{value}</th>
                     })
                 }
@@ -41,7 +50,10 @@ function TableTransactions() {
                             <td className='p-3'>{dateCreation.substring(0,10)}</td>
                             <td className='p-3'>{dateExpiration.substring(0,10)}</td>
                             <td className='p-3'>{montant}</td>
-                            <td className='p-3 text-center'><img className='view-icon' src={viewIcon} alt="view" onClick={() => handleViewTransactionClick(id)}/></td>
+                            <td className='pt-3 pb-3 text-center'>
+                                <img className='view-icon' src={viewIcon} alt="view" onClick={() => handleViewTransactionClick(id)}/>
+                                <img className='view-icon' src={downloadIcon} alt="download" onClick={() => handleDownloadTransactionClick(id, )}/>
+                            </td>
                         </tr>
                     })) : null
                 }
