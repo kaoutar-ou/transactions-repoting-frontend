@@ -27,3 +27,17 @@ export const TableTransactionsColumns = {
     montant:"Montant",
     actions:"Actions"
 };
+
+export const TypeTransaction = {
+    EMISSION:"Emission",
+    MODIFICATION:"Modification",
+    AMENDEMENT:"Amendement",
+    UTILISATION_A_VUE:"Utilisation à vue",
+    UTILISATION_A_ECHEANCE:"Utilisation à échéance",
+    MESSAGE:"Message"
+}
+
+export const typeProduit = {
+    IMPORT:"Import",
+    EXPORT:"Export"
+}

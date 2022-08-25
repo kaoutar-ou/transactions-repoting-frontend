@@ -28,6 +28,7 @@ function Paginator(props) {
     for (let number = 1; number <= numPages; number++) {
       pages.push(
         <div
+        onClick={() => props.handlePagination(number-1)}
           key={number}
           className={
             number === active
@@ -37,9 +38,6 @@ function Paginator(props) {
         >
           {number}
         </div>
-        // <Pagination.Item className='pagination-item' key={number} active={number === active}>
-        //     {number}
-        // </Pagination.Item>,
       );
     }
   } else {
@@ -47,6 +45,7 @@ function Paginator(props) {
       if (first !== active) {
         pages.push(
           <div
+          onClick={() => props.handlePagination(first-1)}
             key={first}
             className={
               first === active
@@ -70,6 +69,7 @@ function Paginator(props) {
       for (let number = min; number <= max; number++) {
         pages.push(
           <div
+          onClick={() => props.handlePagination(number-1)}
             key={number}
             className={
               number === active
@@ -94,6 +94,7 @@ function Paginator(props) {
       if (last !== active) {
         pages.push(
           <div
+          onClick={() => props.handlePagination(last-1)}
             key={last}
             className={
               last === active
