@@ -8,12 +8,16 @@ import downloadIcon from "../../download-icon.svg";
 import "./style.css";
 import * as constants from "../../services/constants";
 import * as pdfTransactionService from "../../services/pdfTransactionService";
+import { useNavigate } from "react-router-dom";
 
 function TableTransactions() {
   const transactions = useSelector((state) => state.transactions);
 
+  let navigate = useNavigate();
+
   const handleViewTransactionClick = (transaction_id) => {
     console.log(transaction_id);
+    navigate("/transactions/" + transaction_id);
   };
 
   const handleDownloadTransactionClick = async (transaction_id) => {

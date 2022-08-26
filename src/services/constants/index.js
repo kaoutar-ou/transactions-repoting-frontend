@@ -41,3 +41,11 @@ export const typeProduit = {
     IMPORT:"Import",
     EXPORT:"Export"
 }
+
+export const transactionInfosSections = {
+    TRANSACTION:"Transaction",
+    CLIENT:"Client",
+    BENEFICIAIRE:"Bénéficiaire",
+    BANQUE_CLIENT:"Banque du client",
+    BANQUE_BENEFICIAIRE:"Banque du bénéficiaire"
+}
