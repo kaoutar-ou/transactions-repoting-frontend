@@ -7,20 +7,28 @@ const beneficiairesUrl = "/beneficiaires"
 
 // export const listTransactions = async (id_client) => await axios.get(listTransactionsUrl + "/" + id_client);
 
-export const listTransactions = async (id_client, page=0, size=2) => await axios.get(listTransactionsUrl + "/" + id_client, { headers: null, 
+// export const listTransactions = async (id_client, page=0, size=2) => await axios.get(listTransactionsUrl + "/" + id_client, { headers: null, 
+//     params: {
+//         page:page,
+//         size:size
+//     }}
+// );
+
+
+export const listTransactions = async (id_client, transaction, page=0, size=2) => await axios.post(searchtransactionsUrl + "/" + id_client, transaction, { headers: null, 
     params: {
         page:page,
         size:size
     }}
 );
 
-export const searchTransactions = async (id_client, transaction) => await axios.post(searchtransactionsUrl + "/" + id_client, transaction);
+// // export const searchTransactions = async (id_client, transaction) => await axios.post(searchtransactionsUrl + "/" + id_client, transaction);
 
-// export const searchTransactions = async (id_client, transaction, page=0, size=2) => await axios.post(searchtransactionsUrl + "/" + id_client, { headers: null, 
+// export const searchTransactions = async (id_client, transaction, page=0, size=2) => await axios.post(searchtransactionsUrl + "/" + id_client, transaction, { headers: null, 
 //     params: {
 //         page:page,
 //         size:size
-//     }}, transaction);
+//     }});
 
 export const pdfTransactions = async (id_client) => await axios.get(pdfTransactionsUrl + "/" + id_client, {
     headers: {

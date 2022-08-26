@@ -8,7 +8,7 @@ import { listTransactions } from "../../services/actions/transactionActions";
 import './style.css'
 import * as constants from '../../services/constants'
 
-function RechercheTransactions() {
+function RechercheTransactions(props) {
 
     const transactions = useSelector((state) => state.transactions);
 
@@ -20,6 +20,9 @@ function RechercheTransactions() {
     const dateExpirationRef = useRef();
 
     const [beneficiaires, setBeneficiaires] = useState({});
+
+    const [last, setLast] = useState();
+    const [first, setFirst] = useState();
 
     const dispatch = useDispatch();
 
@@ -44,8 +47,8 @@ function RechercheTransactions() {
 
     const handleRechercheClick = async (e) => {
         e.preventDefault()
-        // console.log(transactions)
-        let txn = {
+
+        let transactionObject = {
             reference : (referenceRef.current.value !== "") ? referenceRef.current.value : null,
             typeTransaction : (typeTransactionRef.current.value !== "") ? typeTransactionRef.current.value : null,
             typeProduit : (typeProduitRef.current.value !== "") ? typeProduitRef.current.value : null,
@@ -54,23 +57,70 @@ function RechercheTransactions() {
             beneficiaire_id : (beneficiaireRef.current.value !== "") ? beneficiaireRef.current.value : null
         }
 
-        console.log("txn")
-        console.log(txn)
+        console.log(transactionObject)
+        const response = await transactionService.getTransactionsList(3, transactionObject, props.page);
 
-        const response = await transactionService.searchTransactions(3, txn);
-        // const response = await transactionService.searchTransactions(3, txn, 1);
+        let transactionsList
+        let nbreTotalPages
+
         if (Object.keys(response.errMsgs).length > 0 ) {
             console.log("response.errMsgs");
         }
         else {
-            console.log("res");
+            transactionsList = (response?.transactions?.content) ? response.transactions.content : null
+            nbreTotalPages = (response?.transactions?.totalPages) ? response.transactions.totalPages : 1
+            dispatch(listTransactions(transactionsList));
+            props.handleSetTransactionObject(transactionObject)
+            props.handleSetNbrePages(nbreTotalPages)
+            // props.setPage(0)
+            props.handlePagination(0)
+            console.log("res1");
             console.log(response.transactions);
-            dispatch(listTransactions(response.transactions));
-            // dispatch(listTransactions(response.transactions.content));
+            
         }
-        // let res = await getTransactionsList(3);
-        // console.log("res");
-        // console.log(res);
+
+        // e.preventDefault()
+        // // console.log(transactions)
+        // let txn = {
+        //     reference : (referenceRef.current.value !== "") ? referenceRef.current.value : null,
+        //     typeTransaction : (typeTransactionRef.current.value !== "") ? typeTransactionRef.current.value : null,
+        //     typeProduit : (typeProduitRef.current.value !== "") ? typeProduitRef.current.value : null,
+        //     dateExpiration : (dateExpirationRef.current.value !== "") ? dateExpirationRef.current.value : null,
+        //     dateCreation : (dateCreationRef.current.value !== "") ? dateCreationRef.current.value : null,
+        //     beneficiaire_id : (beneficiaireRef.current.value !== "") ? beneficiaireRef.current.value : null
+        // }
+
+        // props.handleSetTxn(txn)
+
+        // console.log("txn")
+        // console.log(txn)
+
+        // const response = await transactionService.searchTransactions(3, txn, props.page+1);
+        // // const response = await transactionService.searchTransactions(3, txn, 1);
+        // if (Object.keys(response.errMsgs).length > 0 ) {
+        //     console.log("response.errMsgs");
+        // }
+        // else {
+        //     console.log("res");
+        //     console.log(response.transactions);
+
+        //     // const lastIndex = (props.page+1) * props.totalPerPage
+        //     // const firstIndex = lastIndex - props.totalPerPage
+        //     // console.log("lastIndex" + lastIndex)
+        //     // console.log("firstIndex" + firstIndex)
+        //     // setLast(lastIndex)
+        //     // setFirst(firstIndex)
+        //     // const transactionsList = response.transactions.slice(firstIndex, lastIndex)
+        //     // console.log(transactionsList)
+
+
+        //     // dispatch(listTransactions(transactionsList));
+        //     dispatch(listTransactions(response.transactions.content));
+        //     // dispatch(listTransactions(response.transactions.content));
+        // }
+        // // let res = await getTransactionsList(3);
+        // // console.log("res");
+        // // console.log(res);
     }
     
   return (
