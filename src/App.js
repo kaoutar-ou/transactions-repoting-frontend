@@ -19,7 +19,6 @@ function App() {
         <Route path="/" element={<ListTransactions />} />
         <Route path="/transactions/:id" element={<TransactionInfos />} />
       </Routes>
-          {/* <ListTransactions /> */}
         </div>
       </div>
     </div>
