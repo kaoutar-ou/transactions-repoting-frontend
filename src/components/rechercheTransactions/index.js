@@ -72,55 +72,10 @@ function RechercheTransactions(props) {
             dispatch(listTransactions(transactionsList));
             props.handleSetTransactionObject(transactionObject)
             props.handleSetNbrePages(nbreTotalPages)
-            // props.setPage(0)
             props.handlePagination(0)
             console.log("res1");
             console.log(response.transactions);
-            
         }
-
-        // e.preventDefault()
-        // // console.log(transactions)
-        // let txn = {
-        //     reference : (referenceRef.current.value !== "") ? referenceRef.current.value : null,
-        //     typeTransaction : (typeTransactionRef.current.value !== "") ? typeTransactionRef.current.value : null,
-        //     typeProduit : (typeProduitRef.current.value !== "") ? typeProduitRef.current.value : null,
-        //     dateExpiration : (dateExpirationRef.current.value !== "") ? dateExpirationRef.current.value : null,
-        //     dateCreation : (dateCreationRef.current.value !== "") ? dateCreationRef.current.value : null,
-        //     beneficiaire_id : (beneficiaireRef.current.value !== "") ? beneficiaireRef.current.value : null
-        // }
-
-        // props.handleSetTxn(txn)
-
-        // console.log("txn")
-        // console.log(txn)
-
-        // const response = await transactionService.searchTransactions(3, txn, props.page+1);
-        // // const response = await transactionService.searchTransactions(3, txn, 1);
-        // if (Object.keys(response.errMsgs).length > 0 ) {
-        //     console.log("response.errMsgs");
-        // }
-        // else {
-        //     console.log("res");
-        //     console.log(response.transactions);
-
-        //     // const lastIndex = (props.page+1) * props.totalPerPage
-        //     // const firstIndex = lastIndex - props.totalPerPage
-        //     // console.log("lastIndex" + lastIndex)
-        //     // console.log("firstIndex" + firstIndex)
-        //     // setLast(lastIndex)
-        //     // setFirst(firstIndex)
-        //     // const transactionsList = response.transactions.slice(firstIndex, lastIndex)
-        //     // console.log(transactionsList)
-
-
-        //     // dispatch(listTransactions(transactionsList));
-        //     dispatch(listTransactions(response.transactions.content));
-        //     // dispatch(listTransactions(response.transactions.content));
-        // }
-        // // let res = await getTransactionsList(3);
-        // // console.log("res");
-        // // console.log(res);
     }
     
   return (
@@ -194,12 +149,6 @@ function RechercheTransactions(props) {
                     {constants.ListTransactionsConstants.rechercher}
                 </button>
                 </div>
-                {/* <Button type="submit" className='mx-1 px-3 reinitialiser-button'>
-                    {constants.ListTransactionsConstants.reinitialiser}
-                </Button>
-                <Button variant="primary" type="submit" className='px-3 rechercher-button'>
-                    {constants.ListTransactionsConstants.rechercher}
-                </Button> */}
             </div>
         </Form>
     </div>

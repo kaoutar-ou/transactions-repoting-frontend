@@ -112,7 +112,7 @@ function Paginator(props) {
     <>
       {numPages > 1 ? (
         <div className="pagination-container d-flex">{pages}</div>
-      ) : // <Pagination>{pages}</Pagination>
+      ) :
       null}
     </>
   );

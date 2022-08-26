@@ -16,8 +16,7 @@ export const ListTransactionsConstants = {
 }
 
 export const TableTransactionsColumns = {
-    reference:"Reference", 
-    // client:"Client", 
+    reference:"Reference",
     beneficiaire:"Bénéficiaire", 
     typeTransaction:"Type de transaction", 
     typePayement:"Type du payement", 

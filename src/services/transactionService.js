@@ -21,66 +21,21 @@ export const getTransactionsList = async (id_client, transaction, page, size) =>
     return response;
 }
 
-// export const getTransactionsList = async (id_client, page, size) => {
+export const getTransaction = async (id_transaction) => {
+    let response = {
+        transaction: {},
+        errMsgs: {}
+    }
 
-//     let response = {
-//         transactions: {},
-//         errMsgs: {}
-//     }
+    let res;
 
-//     let res;
+    try {
+        res = await api.getTransaction(id_transaction);
+        response.transaction = res.data;
+    }
+    catch (err) {
+        response.errMsgs = {...response.errMsgs, err};
+    }
 
-//     try {
-//         res = await api.listTransactions(id_client, page, size);
-//         response.transactions = res.data;
-//     }
-//     catch (err) {
-//         response.errMsgs = {...response.errMsgs, err};
-//     }
-
-//     return response;
-// }
-
-// export const searchTransactions = async (id_client, transaction) => {
-    
-//     let response = {
-//         transactions: {},
-//         errMsgs: {}
-//     }
-
-//     let res;
-
-//     try {
-//         res = await api.searchTransactions(id_client, transaction);
-//         response.transactions = res.data;
-//         console.log("res.data");
-//         console.log(res.data);
-//     }
-//     catch (err) {
-//         response.errMsgs = {...response.errMsgs, err};
-//     }
-
-//     return response;
-// }
-
-// export const searchTransactions = async (id_client, transaction, page, size) => {
-    
-//         let response = {
-//             transactions: {},
-//             errMsgs: {}
-//         }
-    
-//         let res;
-    
-//         try {
-//             res = await api.searchTransactions(id_client, transaction, page, size);
-//             response.transactions = res.data;
-//             console.log("res.data");
-//             console.log(res.data);
-//         }
-//         catch (err) {
-//             response.errMsgs = {...response.errMsgs, err};
-//         }
-    
-//         return response;
-// }
+    return response;
+}

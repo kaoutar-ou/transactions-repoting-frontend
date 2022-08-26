@@ -2,52 +2,71 @@ import React, { useEffect, useState } from "react";
 import "./style.css";
 import * as constants from "../../services/constants"
 import TransactionSection from "../transactionSection";
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+import * as transactionService from "../../services/transactionService"
+import * as pdfTransactionService from "../../services/pdfTransactionService";
+import { ListTransactionsConstants } from '../../services/constants';
+import previousIcon from "../../previous-icon.svg";
 
 function TransactionInfos(props) {
-    const [transaction, setTransaction] = useState({});
-    const [client, setClient] = useState({});
-    const [beneficiaire, setBeneficiaire] = useState({});
-    const [banqueClient, setBanqueClient] = useState({});
-    const [banqueBeneficiaire, setBanqueBeneficiaire] = useState({});
+    const [transaction, setTransaction] = useState(null);
+    const [client, setClient] = useState(null);
+    const [beneficiaire, setBeneficiaire] = useState(null);
+    const [banqueClient, setBanqueClient] = useState(null);
+    const [banqueBeneficiaire, setBanqueBeneficiaire] = useState(null);
 
     let { id } = useParams();
     console.log(id)
 
-    const handleSetInfos = () => {
-        let response
+    let navigate = useNavigate();
+
+    const handleSetInfos = async () => {
+
+        let response = await transactionService.getTransaction(id);
+        console.log(response)
+
+        let transactionResponse
+
+        if (Object.keys(response.errMsgs).length > 0 ) {
+            console.log("response.errMsgs");
+        }
+        else {
+            transactionResponse = response.transaction
+        }
+
+        // let response
         let transactionSection = {
-            reference: response.reference,
-            typeTransaction: response.typeTransaction,
-            typePayement: response.typePayement,
-            typeProduit: response.typeProduit,
-            dateCreation: response.dateCreation,
-            dateExpiration: response.dateExpiration,
-            montant: response.montant
+            reference: transactionResponse.reference,
+            typeTransaction: transactionResponse.typeTransaction,
+            typePayement: transactionResponse.typePayement,
+            typeProduit: transactionResponse.typeProduit,
+            dateCreation: transactionResponse.dateCreation,
+            dateExpiration: transactionResponse.dateExpiration,
+            montant: transactionResponse.montant
         }
 
         let clientSection = {
-            nomComplet: response.client.nomComplet,
-            addresse: response.client.addresse,
-            compte: response.client.compte
+            nomComplet: transactionResponse.client.nomComplet,
+            addresse: transactionResponse.client.address,
+            compte: transactionResponse.client.account
         }
 
         let beneficiaireSection = {
-            nomComplet: response.beneficiaire.nomComplet,
-            addresse: response.beneficiaire.addresse,
-            compte: response.beneficiaire.compte
+            nomComplet: transactionResponse.beneficiaire.nomComplet,
+            addresse: transactionResponse.beneficiaire.address,
+            compte: transactionResponse.beneficiaire.account
         }
 
         let banqueClientSection = {
-            codeBIC: response.client.banque.codeBIC,
-            nom: response.client.banque.nom,
-            adresse: response.client.banque.adresse
+            codeBIC: transactionResponse.client.banque.codeBIC,
+            nom: transactionResponse.client.banque.nom,
+            adresse: transactionResponse.client.banque.address
         }
 
         let banqueBeneficiaireSection = {
-            codeBIC: response.beneficiaire.banque.codeBIC,
-            nom: response.beneficiaire.banque.nom,
-            adresse: response.beneficiaire.banque.adresse
+            codeBIC: transactionResponse.beneficiaire.banque.codeBIC,
+            nom: transactionResponse.beneficiaire.banque.nom,
+            adresse: transactionResponse.beneficiaire.banque.address
         }
 
         setTransaction(transactionSection)
@@ -61,55 +80,83 @@ function TransactionInfos(props) {
         handleSetInfos()
     }, []);
 
+    const handleGenererRapport = async () => {
+        console.log(id);
+        let res = await pdfTransactionService.getPdfTransaction(
+          3,
+          id,
+          document
+        );
+      };
+
   return (
     <div className="p-4">
-        {/* {id} */}
-      <div className="list-head my-5">Transaction {props.reference}</div>
-      <div className="list-container">
-        <div className="infos-transaction-container border">
-            {/* <div className="infos-container">
-                <div className="infos-header p-3">Transaction</div>
-                <div className="infos-content row p-3">
-                    <div className="col col-12 col-sm-6 col-lg-4">
-                        <div className="info-heading">Test</div>
-                        <div className="info-description">test</div>
-                    </div>
-                    <div className="col col-12 col-sm-6 col-lg-4">
-                        <div className="info-heading">Test</div>
-                        <div className="info-description">test</div>
-                    </div>
-                    <div className="col col-12 col-sm-6 col-lg-4">
-                        <div className="info-heading">Test</div>
-                        <div className="info-description">test</div>
-                    </div>
-                    <div className="col col-12 col-sm-6 col-lg-4">
-                        <div className="info-heading">Test</div>
-                        <div className="info-description">test</div>
-                    </div>
-                    <div className="col col-12 col-sm-6 col-lg-4">
-                        <div className="info-heading">Test</div>
-                        <div className="info-description">test</div>
-                    </div>
-                    <div className="col col-12 col-sm-6 col-lg-4">
-                        <div className="info-heading">Test</div>
-                        <div className="info-description">test</div>
-                    </div>
-                    <div className="col col-12 col-sm-6 col-lg-4">
-                        <div className="info-heading">Test</div>
-                        <div className="info-description">test</div>
+      
+      
+      <div className='row my-3'>
+                <div className='col col-6'>
+                <div className="list-head my-5">Informations du transaction</div>
+                </div>
+                <div className='col col-6 my-5'>
+                    <div className='d-flex flex-row-reverse m-3'>
+                    {/* <button className=""
+      onClick={() => navigate("/")}>
+        return
+      </button> */}
+      <img width={28} src={previousIcon} className="previous-icon" alt="previous" onClick={() => navigate("/")}></img>
                     </div>
                 </div>
-            </div> */}
-            <TransactionSection title="Transaction" data={transaction}/>
-            <TransactionSection title="Client" data={client}/>
-            <TransactionSection title="Bénéficiaire" data={beneficiaire}/>
-            <TransactionSection title="Banque du client"  data={banqueClient}/>
-            <TransactionSection title="Banque du bénéficiaire"  data={banqueBeneficiaire}/>
+            </div>
+        <div className="infos-transaction-container border">
+            {
+                (transaction) ? (
+                    <TransactionSection title="Transaction" data={transaction}/>
+                ) : null
+            }
+            </div>
+            <div className="infos-transaction-container border">
+            {
+                (client) ? (
+                    <TransactionSection title="Client" data={client}/>
+                ) : null
+            }
+            </div>
+            <div className="infos-transaction-container border">
+            {
+                (beneficiaire) ? (
+                    <TransactionSection title="Bénéficiaire" data={beneficiaire}/>
+                ) : null
+            }
+            </div>
+            <div className="infos-transaction-container border">
+            {
+                (banqueClient) ? (
+                    <TransactionSection title="Banque du client"  data={banqueClient}/>
+                ) : null
+            }
+            </div>
+            <div className="infos-transaction-container border">
+            {
+                (banqueBeneficiaire) ? (
+                    <TransactionSection title="Banque du bénéficiaire"  data={banqueBeneficiaire}/>
+                ) : null
+            }
         </div>
-      </div>
       <div className="row my-3">
         <div className="col col-6"></div>
       </div>
+
+      <div className='row my-3'>
+                <div className='col col-6'>
+                </div>
+                <div className='col col-6'>
+                    <div className='d-flex flex-row-reverse'>
+                        <button type='submit' className='generer-rapport-button px-5 py-2' onClick={() => handleGenererRapport()}>
+                            {ListTransactionsConstants.genererRapport}
+                        </button>
+                    </div>
+                </div>
+            </div>
     </div>
   );
 }

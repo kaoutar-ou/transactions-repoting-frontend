@@ -7,19 +7,13 @@ export const getPdfTransactions = async (id_client, document) => {
         errMsgs: {}
     }
 
-    // let res;
     let http = new XMLHttpRequest();
     let url = "http://localhost:8080/api/pdf/"+id_client;
 
     try {
-        // res = await api.pdfTransactions(id_client);
-        // console.log('res service');
-        // console.log(res);
-        // response.pdf = res.data;
         http.open('get', url, true);
         http.responseType = "blob";
         http.onload = function() {
-            // console.log(http.response)
             const report = new Blob([http.response], { type: 'application/pdf' });
             const reportURL = URL.createObjectURL(report);
             const link = document.createElement("a");
@@ -49,19 +43,13 @@ export const getPdfTransaction = async (id_client, id_transaction, document) => 
         errMsgs: {}
     }
 
-    // let res;
     let http = new XMLHttpRequest();
-    let url = "http://localhost:8080/api/pdf/"+id_client+"/transaction/"+id_transaction;
+    let url = "http://localhost:8080/api/transactions/report/"+id_client+"/"+id_transaction;
 
     try {
-        // res = await api.pdfTransactions(id_client);
-        // console.log('res service');
-        // console.log(res);
-        // response.pdf = res.data;
         http.open('get', url, true);
         http.responseType = "blob";
         http.onload = function() {
-            // console.log(http.response)
             const report = new Blob([http.response], { type: 'application/pdf' });
             const reportURL = URL.createObjectURL(report);
             const link = document.createElement("a");

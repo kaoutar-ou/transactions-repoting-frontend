@@ -18,8 +18,6 @@ function ListTransactions() {
 
     const [page, setPage] = useState(0);
     const [nbrePages, setNbrePages] = useState(1);
-    // const [last, setLast] = useState();
-    // const [first, setFirst] = useState();
 
     const [transactionObject, setTransactionObject] = useState(null);
 
@@ -55,36 +53,6 @@ function ListTransactions() {
             
             dispatch(listTransactions(transactionsList));
         }
-
-
-        // // const response = await transactionService.getTransactionsList(3, page);
-        // console.log("txn")
-        // console.log(txn)
-        // console.log(page)
-        // let response
-        // let result
-        // let nbreTotalPages
-        // if(txn != null) {
-        //     response = await transactionService.searchTransactions(3, txn, page+1);
-        //     // result = (response?.transactions) ? response.transactions : null
-        //     // nbreTotalPages = (response?.transactions?.totalPages) ? response.transactions.totalPages : 1
-        // }
-        // else {
-        //     response = await transactionService.getTransactionsList(3, page);
-        //     // result = (response?.transactions?.content) ? response?.transactions?.content : null
-        // }
-        // if (Object.keys(response.errMsgs).length > 0 ) {
-        //     console.log("response.errMsgs");
-        // }
-        // else {
-        //     result = (response?.transactions?.content) ? response.transactions.content : null
-        //     nbreTotalPages = (response?.transactions?.totalPages) ? response.transactions.totalPages : 1
-        //     setNbrePages(nbreTotalPages)
-        //     console.log("res1");
-        //     console.log(response.transactions);
-        //     // dispatch(listTransactions(response.transactions.content));
-        //     dispatch(listTransactions(result));
-        // }
     }
 
     useEffect(() => {
