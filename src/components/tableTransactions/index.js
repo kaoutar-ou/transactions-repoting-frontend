@@ -52,21 +52,22 @@ function TableTransactions() {
                 id,
                 reference,
                 beneficiaire,
-                typeTransaction,
-                typePayement,
-                typeProduit,
+                typeTransactionValue,
+                typePayementValue,
+                typeProduitValue,
                 dateCreation,
                 dateExpiration,
-                montant,
+                // montant,
               } = transaction;
 
+              const montant = Number(transaction.montant).toFixed(2)
               return (
                 <tr key={transaction.id}>
                   <td className="p-3">{reference}</td>
                   <td className="p-3">{beneficiaire.nomComplet}</td>
-                  <td className="p-3">{typeTransaction}</td>
-                  <td className="p-3">{typePayement}</td>
-                  <td className="p-3">{typeProduit}</td>
+                  <td className="p-3">{typeTransactionValue}</td>
+                  <td className="p-3">{typePayementValue}</td>
+                  <td className="p-3">{typeProduitValue}</td>
                   <td className="p-3">{dateCreation.substring(0, 10)}</td>
                   <td className="p-3">{dateExpiration.substring(0, 10)}</td>
                   <td className="p-3">{montant}</td>

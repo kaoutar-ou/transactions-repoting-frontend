@@ -37,12 +37,12 @@ function TransactionInfos(props) {
         // let response
         let transactionSection = {
             reference: transactionResponse.reference,
-            typeTransaction: transactionResponse.typeTransaction,
-            typePayement: transactionResponse.typePayement,
-            typeProduit: transactionResponse.typeProduit,
-            dateCreation: transactionResponse.dateCreation,
-            dateExpiration: transactionResponse.dateExpiration,
-            montant: transactionResponse.montant
+            typeTransaction: transactionResponse.typeTransactionValue,
+            typePayement: transactionResponse.typePayementValue,
+            typeProduit: transactionResponse.typeProduitValue,
+            dateCreation: transactionResponse.dateCreationValue,
+            dateExpiration: transactionResponse.dateExpirationValue,
+            montant: Number(transactionResponse.montant).toFixed(2)
         }
 
         let clientSection = {

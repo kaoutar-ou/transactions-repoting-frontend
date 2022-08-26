@@ -24,6 +24,10 @@ function Paginator(props) {
       : active + 1 < numPages
       ? active + 1
       : active;
+
+  console.log(active)
+  console.log(last)
+  console.log(first)
   if (numPages >= 1 && numPages <= 13) {
     for (let number = 1; number <= numPages; number++) {
       pages.push(
@@ -60,7 +64,7 @@ function Paginator(props) {
       if (active - first > 4) {
       pages.push(
         <div
-          key={0}
+          key={"-2"}
           className={"pagination-item-dots px-3 py-2"}
         >
           ...
@@ -84,7 +88,7 @@ function Paginator(props) {
       if (last - active > 4) {
       pages.push(
         <div
-          key={0}
+          key={"-1"}
           className={"pagination-item-dots px-3 py-2"}
         >
           ...
