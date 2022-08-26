@@ -33,9 +33,6 @@ function ListTransactions() {
 
     const getTransactions = async (page) => {
 
-        console.log("transactionObject")
-        console.log(transactionObject)
-
         const response = await transactionService.getTransactionsList(3, transactionObject, page);
 
         let transactionsList
@@ -48,8 +45,6 @@ function ListTransactions() {
             transactionsList = (response?.transactions?.content) ? response.transactions.content : null
             nbreTotalPages = (response?.transactions?.totalPages) ? response.transactions.totalPages : 1
             handleSetNbrePages(nbreTotalPages)
-            console.log("res1");
-            console.log(response.transactions);
             
             dispatch(listTransactions(transactionsList));
         }
@@ -64,14 +59,10 @@ function ListTransactions() {
     }, []);
 
     const handleGenererRapport = async () => {
-        console.log(transactions.map((transaction) => transaction.id));
         let res = await pdfTransactionService.getPdfTransactions(3, document);
-        console.log('res');
-        console.log(res);
     }
     
     const handlePagination = (page) => {
-        console.log(page);
         setPage(page);
         getTransactions(page);
     }

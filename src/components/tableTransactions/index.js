@@ -16,12 +16,10 @@ function TableTransactions() {
   let navigate = useNavigate();
 
   const handleViewTransactionClick = (transaction_id) => {
-    console.log(transaction_id);
     navigate("/transactions/" + transaction_id);
   };
 
   const handleDownloadTransactionClick = async (transaction_id) => {
-    console.log(transaction_id);
     let res = await pdfTransactionService.getPdfTransaction(
       3,
       transaction_id,

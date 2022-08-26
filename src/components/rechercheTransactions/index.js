@@ -21,9 +21,6 @@ function RechercheTransactions(props) {
 
     const [beneficiaires, setBeneficiaires] = useState({});
 
-    const [last, setLast] = useState();
-    const [first, setFirst] = useState();
-
     const dispatch = useDispatch();
 
     const getBeneficiaires = async () => {
@@ -41,10 +38,6 @@ function RechercheTransactions(props) {
         getBeneficiaires();
     }, []);
 
-    const testDate = (e) => {
-        console.log(e.target.value);
-    }
-
     const handleRechercheClick = async (e) => {
         e.preventDefault()
 
@@ -57,7 +50,6 @@ function RechercheTransactions(props) {
             beneficiaire_id : (beneficiaireRef.current.value !== "") ? beneficiaireRef.current.value : null
         }
 
-        console.log(transactionObject)
         const response = await transactionService.getTransactionsList(3, transactionObject, props.page);
 
         let transactionsList
@@ -73,8 +65,6 @@ function RechercheTransactions(props) {
             props.handleSetTransactionObject(transactionObject)
             props.handleSetNbrePages(nbreTotalPages)
             props.handlePagination(0)
-            console.log("res1");
-            console.log(response.transactions);
         }
     }
     
@@ -116,8 +106,6 @@ function RechercheTransactions(props) {
                         }
                     </Form.Select>
                 </Form.Group>
-            {/* </div>
-            <div className='row'> */}
                 <Form.Group className="mb-3 col col-12 col-sm-6 col-lg-4" controlId="typeProduit">
                     <Form.Label>{constants.ListTransactionsConstants.typeProduit}</Form.Label>
                     <Form.Select className='recherche-input' ref={typeProduitRef}>
@@ -133,7 +121,7 @@ function RechercheTransactions(props) {
                 </Form.Group>
                 <Form.Group className="mb-3 col col-12 col-sm-6 col-lg-4" controlId="dateCreation">
                     <Form.Label>{constants.ListTransactionsConstants.dateCreation}</Form.Label>
-                    <Form.Control type="date" placeholder="" className='recherche-input' onChange={(e) => testDate(e)} ref={dateCreationRef}/>
+                    <Form.Control type="date" placeholder="" className='recherche-input' ref={dateCreationRef}/>
                 </Form.Group>
                 <Form.Group className="mb-3 col col-12 col-sm-6 col-lg-4" controlId="dateExpiration">
                     <Form.Label>{constants.ListTransactionsConstants.dateExpiration}</Form.Label>

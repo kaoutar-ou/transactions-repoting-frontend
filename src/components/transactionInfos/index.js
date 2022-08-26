@@ -16,14 +16,12 @@ function TransactionInfos(props) {
     const [banqueBeneficiaire, setBanqueBeneficiaire] = useState(null);
 
     let { id } = useParams();
-    console.log(id)
 
     let navigate = useNavigate();
 
     const handleSetInfos = async () => {
 
         let response = await transactionService.getTransaction(id);
-        console.log(response)
 
         let transactionResponse
 
@@ -81,7 +79,6 @@ function TransactionInfos(props) {
     }, []);
 
     const handleGenererRapport = async () => {
-        console.log(id);
         let res = await pdfTransactionService.getPdfTransaction(
           3,
           id,

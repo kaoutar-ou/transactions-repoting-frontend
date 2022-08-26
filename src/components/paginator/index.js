@@ -25,9 +25,6 @@ function Paginator(props) {
       ? active + 1
       : active;
 
-  console.log(active)
-  console.log(last)
-  console.log(first)
   if (numPages >= 1 && numPages <= 13) {
     for (let number = 1; number <= numPages; number++) {
       pages.push(
