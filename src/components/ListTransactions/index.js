@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {Table, Button} from 'react-bootstrap';
 import * as transactionService from "../../services/transactionService"
-import * as pdfTransactionService from "../../services/pdfTransactionService"
 import { useDispatch, useSelector } from "react-redux";
 import { listTransactions } from "../../services/actions/transactionActions";
 import TableTransactions from '../tableTransactions';
@@ -9,7 +7,6 @@ import RechercheTransactions from '../rechercheTransactions';
 import Paginator from '../paginator';
 
 import './style.css';
-import { ListTransactionsConstants } from '../../services/constants';
 
 function ListTransactions() {
 
@@ -57,10 +54,6 @@ function ListTransactions() {
     useEffect(() => {
         getTransactions(page);
     }, []);
-
-    const handleGenererRapport = async () => {
-        let res = await pdfTransactionService.getPdfTransactions(3, document);
-    }
     
     const handlePagination = (page) => {
         setPage(page);

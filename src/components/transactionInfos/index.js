@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./style.css";
-import * as constants from "../../services/constants"
 import TransactionSection from "../transactionSection";
 import { useNavigate, useParams } from 'react-router-dom'
 import * as transactionService from "../../services/transactionService"
