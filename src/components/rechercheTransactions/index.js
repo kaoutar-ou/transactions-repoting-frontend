@@ -50,24 +50,29 @@ function RechercheTransactions(props) {
             beneficiaire_id : (beneficiaireRef.current.value !== "") ? beneficiaireRef.current.value : null
         }
 
-        const response = await transactionService.getTransactionsList(3, transactionObject, props.page);
+        // const response = await transactionService.getTransactionsList(3, transactionObject, props.page);
 
-        let transactionsList
-        let nbreTotalPages
+        // let transactionsList
+        // let nbreTotalPages
 
-        if (Object.keys(response.errMsgs).length > 0 ) {
-            console.log("response.errMsgs");
-        }
-        else {
-            transactionsList = (response?.transactions?.content) ? response.transactions.content : null
-            nbreTotalPages = (response?.transactions?.totalPages) ? response.transactions.totalPages : 1
-            dispatch(listTransactions(transactionsList));
+        // if (Object.keys(response.errMsgs).length > 0 ) {
+        //     console.log("response.errMsgs");
+        // }
+        // else {
+        //     transactionsList = (response?.transactions?.content) ? response.transactions.content : null
+        //     nbreTotalPages = (response?.transactions?.totalPages) ? response.transactions.totalPages : 1
+        //     dispatch(listTransactions(transactionsList));
             props.handleSetTransactionObject(transactionObject)
-            props.handleSetNbrePages(nbreTotalPages)
+            // props.handleSetNbrePages(nbreTotalPages)
             props.handlePagination(0)
-        }
+        // }
     }
     
+    const handleReinitialiserClick = (e) => {
+        e.preventDefault()
+        props.handleSetTransactionObject(null)
+    }
+
   return (
     <div className='border recherche-section'>
         <Form className='p-3'>
@@ -130,7 +135,7 @@ function RechercheTransactions(props) {
             </div>
             <div className='d-flex flex-row-reverse'>
                 <div className='row px-4'>
-                <button type='submit' className='recherche-button reinitialiser-button mx-1 px-4 py-2 col'>
+                <button type='submit' className='recherche-button reinitialiser-button mx-1 px-4 py-2 col' onClick={(e) => handleReinitialiserClick(e)}>
                     {constants.ListTransactionsConstants.reinitialiser}
                 </button>
                 <button type='submit' className='recherche-button rechercher-button mx-1 px-4 py-2 col' onClick={(e) => handleRechercheClick(e)}>

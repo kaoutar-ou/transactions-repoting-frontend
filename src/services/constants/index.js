@@ -48,3 +48,37 @@ export const transactionInfosSections = {
     BANQUE_CLIENT:"Banque du client",
     BANQUE_BENEFICIAIRE:"Banque du bénéficiaire"
 }
+
+export const transactionInfos = {
+    RESERENCE:"Reference",
+    TYPE_TRANSACTION:"Type de transaction", 
+    TYPE_PAYEMENT:"Type du payement", 
+    TYPE_PRODUIT:"Type du produit", 
+    DATE_CREATION:"Date de création", 
+    DATE_EXPIRATION:"Date d'expiration", 
+    MONTANT:"Montant",
+}
+
+export const clientInfos = {
+    NOM:"Nom du client",
+    ADRESSE:"Adresse", 
+    COMPTE:"Compte",
+}
+
+export const beneficiaireInfos = {
+    NOM:"Nom du bénéficiaire",
+    ADRESSE:"Adresse", 
+    COMPTE:"Compte",
+}
+
+export const banqueClientInfos = {
+    NOM:"Nom de la banque",
+    CODE_BIC:"Code BIC",
+    ADRESSE:"Adresse", 
+}
+
+export const banqueBeneficiaireInfos = {
+    NOM:"Nom de la banque",
+    CODE_BIC:"Code BIC",
+    ADRESSE:"Adresse", 
+}

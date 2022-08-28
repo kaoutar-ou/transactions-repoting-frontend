@@ -7,6 +7,7 @@ import RechercheTransactions from '../rechercheTransactions';
 import Paginator from '../paginator';
 
 import './style.css';
+import Loading from '../loading';
 
 function ListTransactions() {
 
@@ -28,36 +29,45 @@ function ListTransactions() {
 
     const dispatch = useDispatch();
 
-    const getTransactions = async (page) => {
+    const [loading, setLoading] = useState(true)
 
-        const response = await transactionService.getTransactionsList(3, transactionObject, page);
-
-        let transactionsList
-        let nbreTotalPages
-
-        if (Object.keys(response.errMsgs).length > 0 ) {
-            console.log("response.errMsgs");
-        }
-        else {
-            transactionsList = (response?.transactions?.content) ? response.transactions.content : null
-            nbreTotalPages = (response?.transactions?.totalPages) ? response.transactions.totalPages : 1
-            handleSetNbrePages(nbreTotalPages)
-            
-            dispatch(listTransactions(transactionsList));
-        }
-    }
+    
 
     useEffect(() => {
-        getTransactions(page);
-    }, [transactionObject]);
 
-    useEffect(() => {
+        const getTransactions = async (page) => {
+    
+            const response = await transactionService.getTransactionsList(3, transactionObject, page);
+    
+            let transactionsList
+            let nbreTotalPages
+    
+            if (Object.keys(response.errMsgs).length > 0 ) {
+                console.log("response.errMsgs");
+            }
+            else {
+                transactionsList = (response?.transactions?.content) ? response.transactions.content : null
+                nbreTotalPages = (response?.transactions?.totalPages) ? response.transactions.totalPages : 1
+                handleSetNbrePages(nbreTotalPages)
+                
+                dispatch(listTransactions(transactionsList));
+
+                setLoading(false)
+            }
+
+        }
+
         getTransactions(page);
-    }, []);
+
+    }, [transactionObject, page]);
+
+    // useEffect(() => {
+    //     getTransactions(page);
+    // }, []);
     
     const handlePagination = (page) => {
         setPage(page);
-        getTransactions(page);
+        // getTransactions(page);
     }
 
     return (
@@ -65,7 +75,14 @@ function ListTransactions() {
             <div className='list-head my-5'>Liste des Transactions</div>
             <div className='list-container'>
                 <RechercheTransactions page={page} totalPerPage={totalPerPage} handleSetTransactionObject={handleSetTransactionObject} handleSetNbrePages={handleSetNbrePages} handlePagination={handlePagination}/> 
-                <TableTransactions />  
+                {
+                    (loading) ? 
+                    <div className='p-4 table-container text-center'>
+                    <Loading />
+                    </div>
+:                    
+<TableTransactions /> 
+                 } 
             </div>
             <div className='row my-3'>
                 <div className='col col-6'>

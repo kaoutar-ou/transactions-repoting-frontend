@@ -4,7 +4,7 @@ import TransactionSection from "../transactionSection";
 import { useNavigate, useParams } from "react-router-dom";
 import * as transactionService from "../../services/transactionService";
 import * as pdfTransactionService from "../../services/pdfTransactionService";
-import { ListTransactionsConstants } from "../../services/constants";
+import * as constants from "../../services/constants";
 import previousIcon from "../../previous-icon.svg";
 
 import * as documentJointService from "../../services/documentJointService";
@@ -40,37 +40,37 @@ function TransactionInfos(props) {
 
     // let response
     let transactionSection = {
-      reference: transactionResponse.reference,
-      typeTransaction: transactionResponse.typeTransactionValue,
-      typePayement: transactionResponse.typePayementValue,
-      typeProduit: transactionResponse.typeProduitValue,
-      dateCreation: transactionResponse.dateCreationValue,
-      dateExpiration: transactionResponse.dateExpirationValue,
-      montant: Number(transactionResponse.montant).toFixed(2),
+      "Référence": transactionResponse.reference,
+      "Type de transaction": transactionResponse.typeTransactionValue,
+      "Type du payement": transactionResponse.typePayementValue,
+      "typeProduit": transactionResponse.typeProduitValue,
+      "Date de création": transactionResponse.dateCreationValue,
+      "Date d'expiration": transactionResponse.dateExpirationValue,
+      "Montant": Number(transactionResponse.montant).toFixed(2),
     };
 
     let clientSection = {
-      nomComplet: transactionResponse.client.nomComplet,
-      addresse: transactionResponse.client.address,
-      compte: transactionResponse.client.account,
+      "Nom du client": transactionResponse.client.nomComplet,
+      "Adresse": transactionResponse.client.address,
+      "Compte": transactionResponse.client.account,
     };
 
     let beneficiaireSection = {
-      nomComplet: transactionResponse.beneficiaire.nomComplet,
-      addresse: transactionResponse.beneficiaire.address,
-      compte: transactionResponse.beneficiaire.account,
+      "Nom du bénéficiaire": transactionResponse.beneficiaire.nomComplet,
+      "Adresse": transactionResponse.beneficiaire.address,
+      "Compte": transactionResponse.beneficiaire.account,
     };
 
     let banqueClientSection = {
-      codeBIC: transactionResponse.client.banque.codeBIC,
-      nom: transactionResponse.client.banque.nom,
-      adresse: transactionResponse.client.banque.address,
+      "Nom de la banque": transactionResponse.client.banque.nom,
+      "Code BIC": transactionResponse.client.banque.codeBIC,
+      "Adresse": transactionResponse.client.banque.address,
     };
 
     let banqueBeneficiaireSection = {
-      codeBIC: transactionResponse.beneficiaire.banque.codeBIC,
-      nom: transactionResponse.beneficiaire.banque.nom,
-      adresse: transactionResponse.beneficiaire.banque.address,
+      "Nom de la banque": transactionResponse.beneficiaire.banque.nom,
+      "Code BIC": transactionResponse.beneficiaire.banque.codeBIC,
+      "Adresse": transactionResponse.beneficiaire.banque.address,
     };
 
     console.log(documentsJoints)
@@ -148,52 +148,27 @@ function TransactionInfos(props) {
         ) : null}
       </div>
       <div className="infos-transaction-container border">
-      {documentsJoints ? (
       <div className="infos-container">
                 <div className="infos-header p-3">Documents joints</div>
                 <div className="infos-content row p-3">
-                    {/* {
-                        documentsJoints.map(
-                            doc => (
-                                <div>{doc.name}</div>
-                            )
-                        )
-                    } */}
-                    {
+      {(documentsJoints != null && Object.keys(documentsJoints).length > 0) ? (
+                    
                         documentsJoints.map(
                             doc => (
                                 <>
-                                <div className="col col-12 col-sm-5 col-lg-3 m-3">
-                                    <div className="info-heading">Nom :</div>
-                                    <div className="info-description">{doc.name}</div>
-                                    <div className="info-description"><a className="document-url" href={doc.url}>Télécharger</a></div>
-                                </div>
-                                {/* <div className="col col-12 col-sm-5 col-lg-3 m-3">
-                                    <div className="info-heading">Nom2 :</div>
-                                    <div className="info-description">{doc.name}</div>
-                                </div>
-                                <div className="col col-12 col-sm-5 col-lg-3 m-3">
-                                    <div className="info-heading">Nom3 :</div>
-                                    <div className="info-description">{doc.name}</div>
-                                </div> */}
+                                  <div className="col col-12 col-sm-5 col-lg-3 m-3">
+                                      <div className="info-heading">Nom :</div>
+                                      <div className="info-description">{doc.name}</div>
+                                      <div className="info-description"><a className="document-url" href={doc.url}>Télécharger</a></div>
+                                  </div>
                                 </>
                             )
                         )
-                    }
-                    {/* {Object.keys(documentsJoints)[0]} */}
-                    {/* {
-                        Object.entries(documentsJoints).map((value, index) => {
-                            return (
-                                <div className="col col-12 col-sm-5 col-lg-3 m-3">
-                                    <div className="info-heading">{value[0]}</div>
-                                    <div className="info-description">{value[1]}</div>
-                                </div>
-                            )
-                        })
-                    } */}
-                </div>
-            </div>
-            ) : null}
+                    
+                    ) : <div className="mx-3 m-4 h6">Aucun résultat trouvé !</div>
+                  }
+                  </div>
+              </div>
       </div>
       <div className="row my-3">
         <div className="col col-6"></div>
@@ -208,7 +183,7 @@ function TransactionInfos(props) {
               className="generer-rapport-button px-5 py-2"
               onClick={() => handleGenererRapport()}
             >
-              {ListTransactionsConstants.genererRapport}
+              {constants.ListTransactionsConstants.genererRapport}
             </button>
           </div>
         </div>
