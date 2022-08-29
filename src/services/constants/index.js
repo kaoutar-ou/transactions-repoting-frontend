@@ -41,6 +41,11 @@ export const typeProduit = {
     EXPORT:"Export"
 }
 
+export const typesProduit = {
+    Import:"IMPORT",
+    Export:"EXPORT"
+}
+
 export const transactionInfosSections = {
     TRANSACTION:"Transaction",
     CLIENT:"Client",
@@ -81,4 +86,9 @@ export const banqueBeneficiaireInfos = {
     NOM:"Nom de la banque",
     CODE_BIC:"Code BIC",
     ADRESSE:"Adresse", 
+}
+
+export const typeCodification = {
+    TYPE_TRANSACTION:"TYPE_TRANSACTION",
+    TYPE_PRODUIT:"TYPE_PRODUIT"
 }

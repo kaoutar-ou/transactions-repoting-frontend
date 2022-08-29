@@ -5,6 +5,8 @@ import * as beneficiaireService from "../../services/beneficiaireService"
 import * as transactionService from "../../services/transactionService"
 import { listTransactions } from "../../services/actions/transactionActions";
 
+import * as codificationService from "../../services/codificationService";
+
 import './style.css'
 import * as constants from '../../services/constants'
 
@@ -20,10 +22,13 @@ function RechercheTransactions(props) {
     const dateExpirationRef = useRef();
 
     const [beneficiaires, setBeneficiaires] = useState({});
+    const [typesTransactions, setTypesTransactions] = useState({});
+    const [typesProduits, setTypesProduits] = useState({});
 
     const dispatch = useDispatch();
 
     const getBeneficiaires = async () => {
+        if(Object.keys(beneficiaires).length <= 0) {
         const response = await beneficiaireService.listBeneficiairesByClient(3);
         if (Object.keys(response.errMsgs).length > 0 ) {
             console.log("response.errMsgs");
@@ -33,9 +38,39 @@ function RechercheTransactions(props) {
             setBeneficiaires(listBeneficiaires);
         }
     }
+}
+
+    const getTypesTransactions = async () => {
+        if(Object.keys(typesTransactions).length <= 0) {
+
+        const response = await codificationService.listTypeTransaction()
+        if (Object.keys(response.errMsgs).length > 0 ) {
+            console.log("response.errMsgs");
+        }
+        else {
+            let listTypesTransactions = Array.from(response.typesTransactions)
+            setTypesTransactions(listTypesTransactions);
+        }
+    }
+}
+
+    const getTypesProduits = async () => {
+        if(Object.keys(typesProduits).length <= 0) {
+            const response = await codificationService.listTypeProduit()
+            if (Object.keys(response.errMsgs).length > 0 ) {
+                console.log("response.errMsgs");
+            }
+            else {
+                let listTypesProduits = Array.from(response.typesProduits)
+                setTypesProduits(listTypesProduits);
+            }
+        }
+    }
 
     useEffect(() => {
         getBeneficiaires();
+        getTypesTransactions();
+        getTypesProduits();
     }, []);
 
     const handleRechercheClick = async (e) => {
@@ -50,22 +85,8 @@ function RechercheTransactions(props) {
             beneficiaire_id : (beneficiaireRef.current.value !== "") ? beneficiaireRef.current.value : null
         }
 
-        // const response = await transactionService.getTransactionsList(3, transactionObject, props.page);
-
-        // let transactionsList
-        // let nbreTotalPages
-
-        // if (Object.keys(response.errMsgs).length > 0 ) {
-        //     console.log("response.errMsgs");
-        // }
-        // else {
-        //     transactionsList = (response?.transactions?.content) ? response.transactions.content : null
-        //     nbreTotalPages = (response?.transactions?.totalPages) ? response.transactions.totalPages : 1
-        //     dispatch(listTransactions(transactionsList));
             props.handleSetTransactionObject(transactionObject)
-            // props.handleSetNbrePages(nbreTotalPages)
             props.handlePagination(0)
-        // }
     }
     
     const handleReinitialiserClick = (e) => {
@@ -103,12 +124,16 @@ function RechercheTransactions(props) {
                     <Form.Select className='recherche-input' ref={typeTransactionRef}>
                         <option value={""}>-- {constants.ListTransactionsConstants.selectionner} --</option>
                         {
-                            Object.entries(constants.TypeTransaction).map((value, index) => {
+                        (typesTransactions && Object.keys(typesTransactions).length >= 1) ?
+                        (
+                            typesTransactions.map((typeTransaction) => {
                                 return (
-                                    <option key={value[0]} value={value[0]}>{value[1]}</option>
+                                    <option key={typeTransaction.libelle} value={typeTransaction.libelle}>{constants.TypeTransaction[typeTransaction.libelle]}</option>
                                 )
-                            })
-                        }
+                            } )
+                        ) : (
+                            null
+                        )}
                     </Form.Select>
                 </Form.Group>
                 <Form.Group className="mb-3 col col-12 col-sm-6 col-lg-4" controlId="typeProduit">
@@ -116,12 +141,16 @@ function RechercheTransactions(props) {
                     <Form.Select className='recherche-input' ref={typeProduitRef}>
                         <option value={""}>-- {constants.ListTransactionsConstants.selectionner} --</option>
                         {
-                            Object.entries(constants.typeProduit).map((value, index) => {
+                        (typesProduits && Object.keys(typesProduits).length >= 1) ?
+                        (
+                            typesProduits.map((typeProduit) => {
                                 return (
-                                    <option key={value[0]} value={value[0]}>{value[1]}</option>
+                                    <option key={typeProduit.libelle} value={typeProduit.libelle}>{constants.typeProduit[typeProduit.libelle]}</option>
                                 )
-                            })
-                        }
+                            } )
+                        ) : (
+                            null
+                        )}
                     </Form.Select>
                 </Form.Group>
                 <Form.Group className="mb-3 col col-12 col-sm-6 col-lg-4" controlId="dateCreation">
