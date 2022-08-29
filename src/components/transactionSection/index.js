@@ -5,9 +5,6 @@ import React from 'react'
 
 function TransactionSection(props) {
 
-    console.log(props.title)
-    console.log(props.data)
-    
   return (
     <div className="infos-container">
                 <div className="infos-header p-3">{props.title}</div>

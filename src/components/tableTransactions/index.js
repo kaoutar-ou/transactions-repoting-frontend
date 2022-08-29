@@ -1,6 +1,6 @@
 import React from "react";
-import { Table, Button } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { Table } from "react-bootstrap";
+import { useSelector } from "react-redux";
 
 import viewIcon from "../../view-icon.svg";
 import downloadIcon from "../../download-icon.svg";
@@ -16,12 +16,10 @@ function TableTransactions() {
   let navigate = useNavigate();
 
   const handleViewTransactionClick = (transaction_id) => {
-    console.log(transaction_id);
     navigate("/transactions/" + transaction_id);
   };
 
   const handleDownloadTransactionClick = async (transaction_id) => {
-    console.log(transaction_id);
     let res = await pdfTransactionService.getPdfTransaction(
       3,
       transaction_id,

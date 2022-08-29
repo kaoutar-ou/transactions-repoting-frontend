@@ -29,3 +29,9 @@
   cursor: pointer;
   /* padding: 1px; */
 }
+
+.document-url {
+  /* outline: none; */
+  text-decoration: none;
+  color: rgba(247, 94, 31, 1);
+}
