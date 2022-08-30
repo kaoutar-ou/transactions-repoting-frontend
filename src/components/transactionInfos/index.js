@@ -38,7 +38,6 @@ function TransactionInfos(props) {
       documentsJoints = res.documentsJoints;
     }
 
-    // let response
     let transactionSection = {
       "Référence": transactionResponse.reference,
       "Type de transaction": transactionResponse.typeTransactionValue,
@@ -73,20 +72,6 @@ function TransactionInfos(props) {
       "Adresse": transactionResponse.beneficiaire.banque.address,
     };
 
-    console.log(documentsJoints)
-
-
-    // let documentsJointsSection = Array.from(documentsJoints).forEach(documentJoint => return {
-   
-    //         "Nom": documentJoint.name,
-    //         "Size": documentJoint.name,
-    //         "Type": documentJoint.name,
-    //         "URL du téléchargement": documentJoint.name
-    //         }
-    //     );
-
-        // console.log(documentsJointsSection)
-
     setTransaction(transactionSection);
     setClient(clientSection);
     setBeneficiaire(beneficiaireSection);
@@ -100,7 +85,7 @@ function TransactionInfos(props) {
   }, []);
 
   const handleGenererRapport = async () => {
-    let res = await pdfTransactionService.getPdfTransaction(3, id, document);
+    let res = await pdfTransactionService.getPdfTransaction(constants.client_id, id, document);
   };
 
   return (

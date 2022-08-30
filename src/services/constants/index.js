@@ -1,3 +1,6 @@
+export const client_id = 3
+export const transaction_per_page = 7
+
 export const TransactionActionTypes = {
     LIST_TRANSACTIONS: 'LIST_TRANSACTIONS',
 }

@@ -21,7 +21,7 @@ function TableTransactions() {
 
   const handleDownloadTransactionClick = async (transaction_id) => {
     let res = await pdfTransactionService.getPdfTransaction(
-      3,
+      constants.client_id,
       transaction_id,
       document
     );
@@ -55,7 +55,6 @@ function TableTransactions() {
                 typeProduitValue,
                 dateCreation,
                 dateExpiration,
-                // montant,
               } = transaction;
 
               const montant = Number(transaction.montant).toFixed(2)

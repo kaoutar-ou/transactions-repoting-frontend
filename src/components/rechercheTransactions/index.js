@@ -29,7 +29,7 @@ function RechercheTransactions(props) {
 
     const getBeneficiaires = async () => {
         if(Object.keys(beneficiaires).length <= 0) {
-        const response = await beneficiaireService.listBeneficiairesByClient(3);
+        const response = await beneficiaireService.listBeneficiairesByClient(constants.client_id);
         if (Object.keys(response.errMsgs).length > 0 ) {
             console.log("response.errMsgs");
         }
@@ -128,7 +128,7 @@ function RechercheTransactions(props) {
                         (
                             typesTransactions.map((typeTransaction) => {
                                 return (
-                                    <option key={typeTransaction.libelle} value={typeTransaction.libelle}>{constants.TypeTransaction[typeTransaction.libelle]}</option>
+                                    <option key={typeTransaction.code} value={typeTransaction.code}>{typeTransaction.libelle}</option>
                                 )
                             } )
                         ) : (
@@ -145,7 +145,7 @@ function RechercheTransactions(props) {
                         (
                             typesProduits.map((typeProduit) => {
                                 return (
-                                    <option key={typeProduit.libelle} value={typeProduit.libelle}>{constants.typeProduit[typeProduit.libelle]}</option>
+                                    <option key={typeProduit.code} value={typeProduit.code}>{typeProduit.libelle}</option>
                                 )
                             } )
                         ) : (

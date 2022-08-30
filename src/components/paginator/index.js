@@ -2,6 +2,7 @@ import React from "react";
 import "./style.css";
 
 function Paginator(props) {
+  let maxPages = 10
   let active = props.active ? props.active : 1;
   let numPages = props.numPages ? props.numPages : 1;
   let pages = [];
@@ -24,7 +25,7 @@ function Paginator(props) {
       ? active + 1
       : active;
 
-  if (numPages >= 1 && numPages <= 13) {
+  if (numPages >= 1 && numPages <= maxPages) {
     for (let number = 1; number <= numPages; number++) {
       pages.push(
         <div
@@ -41,7 +42,7 @@ function Paginator(props) {
       );
     }
   } else {
-    if (numPages > 13) {
+    if (numPages > maxPages) {
       if (first !== active) {
         pages.push(
           <div
