@@ -35,7 +35,6 @@ export const listTypeTransaction = async () => {
 
     try {
         res = await api.listCodifications(type)
-        console.log(res)
         response.typesTransactions = res.data;
     }
     catch (err) {

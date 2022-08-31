@@ -5,6 +5,7 @@ import { listTransactions } from "../../services/actions/transactionActions";
 import TableTransactions from '../tableTransactions';
 import RechercheTransactions from '../rechercheTransactions';
 import Paginator from '../paginator';
+import * as constants from "../../services/constants"
 
 import './style.css';
 import Loading from '../loading';
@@ -37,7 +38,7 @@ function ListTransactions() {
 
         const getTransactions = async (page) => {
     
-            const response = await transactionService.getTransactionsList(3, transactionObject, page);
+            const response = await transactionService.getTransactionsList(constants.client_id, transactionObject, page);
     
             let transactionsList
             let nbreTotalPages
@@ -60,14 +61,9 @@ function ListTransactions() {
         getTransactions(page);
 
     }, [transactionObject, page]);
-
-    // useEffect(() => {
-    //     getTransactions(page);
-    // }, []);
     
     const handlePagination = (page) => {
         setPage(page);
-        // getTransactions(page);
     }
 
     return (

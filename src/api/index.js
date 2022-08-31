@@ -1,4 +1,6 @@
 import axios from "./axios";
+import * as constants from "../services/constants"
+
 
 const searchtransactionsUrl = "/transactions/search";
 const pdfTransactionsUrl = "/report"
@@ -11,7 +13,7 @@ const codificationUrl = "/codifications"
 
 const allDocumentsJointsUrl = "/documents"
 
-export const listTransactions = async (id_client, transaction, page=0, size=4) => await axios.post(searchtransactionsUrl + "/" + id_client, transaction, { headers: null, 
+export const listTransactions = async (id_client, transaction, page=0, size=constants.transaction_per_page) => await axios.post(searchtransactionsUrl + "/" + id_client, transaction, { headers: null, 
     params: {
         page:page,
         size:size

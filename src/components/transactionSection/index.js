@@ -19,10 +19,6 @@ function TransactionSection(props) {
                             )
                         })
                     }
-                    {/* <div className="col col-12 col-sm-6 col-lg-4">
-                        <div className="info-heading">Test</div>
-                        <div className="info-description">test</div>
-                    </div> */}
                 </div>
             </div>
   )
