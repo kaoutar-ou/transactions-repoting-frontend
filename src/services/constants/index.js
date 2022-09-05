@@ -15,7 +15,8 @@ export const ListTransactionsConstants = {
     reinitialiser:"Réinitialiser",
     rechercher:"Rechercher",
     selectionner:"Séléctionner",
-    genererRapport:"Générer le rapport"
+    genererRapport:"Générer le rapport",
+    telechargerRapport:"Télécharger le rapport"
 }
 
 export const TableTransactionsColumns = {

@@ -1,7 +1,9 @@
 .list-head {
     font-size: 2.1em;
 }
-
+* {
+    font-size: 12px;
+}
 .list-container {
   box-shadow: 0 3px 9px 0 rgba(0, 0, 0, 0.1);
 }

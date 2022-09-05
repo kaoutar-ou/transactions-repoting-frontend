@@ -8,7 +8,7 @@ function Header() {
     <Nav className='nav'>
         <Nav.Item>
             <Nav.Link href="/">
-                <img src={logo} alt='...' height={'65px'}/>
+                <img src={logo} alt='...' height={'51px'}/>
             </Nav.Link>
         </Nav.Item>
     </Nav>

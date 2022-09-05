@@ -71,12 +71,14 @@ function TableTransactions() {
                   <td className="pt-3 pb-3 text-center">
                     <img
                       className="view-icon"
+                      width={"15px"}
                       src={viewIcon}
                       alt="view"
                       onClick={() => handleViewTransactionClick(id)}
                     />
                     <img
                       className="view-icon"
+                      width={"12px"}
                       src={downloadIcon}
                       alt="download"
                       onClick={() => handleDownloadTransactionClick(id)}

@@ -42,7 +42,7 @@ function TransactionInfos(props) {
       "Référence": transactionResponse.reference,
       "Type de transaction": transactionResponse.typeTransactionValue,
       "Type du payement": transactionResponse.typePayementValue,
-      "typeProduit": transactionResponse.typeProduitValue,
+      "Type du produit": transactionResponse.typeProduitValue,
       "Date de création": transactionResponse.dateCreationValue,
       "Date d'expiration": transactionResponse.dateExpirationValue,
       "Montant": Number(transactionResponse.montant).toFixed(2),
@@ -92,7 +92,7 @@ function TransactionInfos(props) {
     <div className="p-4">
       <div className="row my-3">
         <div className="col col-6">
-          <div className="list-head my-5">Informations du transaction</div>
+          <div className="list-head my-5">Informations de transaction</div>
         </div>
         <div className="col col-6 my-5">
           <div className="d-flex flex-row-reverse m-3">
@@ -142,7 +142,7 @@ function TransactionInfos(props) {
                             doc => (
                                 <>
                                   <div className="col col-12 col-sm-5 col-lg-3 m-3">
-                                      <div className="info-heading">Nom :</div>
+                                      {/* <div className="info-heading">Nom</div> */}
                                       <div className="info-description">{doc.name}</div>
                                       <div className="info-description"><a className="document-url" href={doc.url}>Télécharger</a></div>
                                   </div>
@@ -168,7 +168,7 @@ function TransactionInfos(props) {
               className="generer-rapport-button px-5 py-2"
               onClick={() => handleGenererRapport()}
             >
-              {constants.ListTransactionsConstants.genererRapport}
+              {constants.ListTransactionsConstants.telechargerRapport}
             </button>
           </div>
         </div>
